@@ -313,7 +313,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Fact Sheets</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">Printable information about epilepsy for schools and workplaces</p>
-                    <a href="#" class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors group">
+                    <a href="{{ asset('downloads/epilepsy-fact-sheet.pdf') }}" download class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-800 transition-colors group">
                         Download PDF
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -330,8 +330,8 @@
                     </div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Educational Videos</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">Visual guides to understanding epilepsy and seizure first aid</p>
-                    <a href="#" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition-colors group">
-                        Watch Videos
+                    <a href="{{ asset('downloads/epilepsy-videos.mp4') }}" download class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-800 transition-colors group">
+                        Download Videos (MP4)
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v18l15-9L5 3z" />
                         </svg>
@@ -347,7 +347,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Toolkits</h3>
                     <p class="text-gray-600 mb-6 leading-relaxed">Complete awareness packages for organizations and events</p>
-                    <a href="#" class="inline-flex items-center text-green-600 font-semibold hover:text-green-800 transition-colors group">
+                    <a href="{{ asset('downloads/epilepsy-toolkit.pdf') }}" download class="inline-flex items-center text-green-600 font-semibold hover:text-green-800 transition-colors group">
                         Download Toolkit
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -389,59 +389,97 @@
     </section>
 
     <!-- Share Story Modal -->
-    <div id="storyModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform translate-y-10 transition-all duration-300">
-            <div class="p-6 border-b border-gray-200">
+    <div id="storyModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300 ease-out">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[95vh] overflow-y-auto shadow-2xl transform translate-y-10 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]">
+            <div class="sticky top-0 bg-white z-10 p-6 border-b border-gray-200/70">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-2xl font-bold text-gray-800">Share Your Story</h3>
-                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900">Share Your Story</h3>
+                        <p class="text-gray-500 mt-1">Your experience can inspire and educate others</p>
+                    </div>
+                    <button onclick="closeModal()" class="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <svg class="w-6 h-6 text-gray-500 hover:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     </button>
                 </div>
-                <p class="text-gray-600 mt-2">Your experience can inspire and educate others</p>
             </div>
             
             <form action="{{ route('stories.store') }}" method="POST" class="p-6">
                 @csrf
                 <div class="space-y-6">
-                    <div class="mb-4 flex flex-wrap gap-4">
-                        <div class="flex-1 min-w-[200px]">
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required>
-                        </div>
-                        <div class="flex-1 min-w-[200px]">
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                            <input type="hidden" name="country_code" id="country-code">
-                            <div id="phone-error" class="hidden mt-1">
-                                <p class="text-sm text-red-600">Please enter a valid phone number</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                            <div class="relative">
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 placeholder-gray-400" placeholder="John Doe" required>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
+                                </div>
                             </div>
-                            <p class="text-xs text-gray-500 mt-1">Example: +256 700 123456</p>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <div class="relative">
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200 placeholder-gray-400" placeholder="+256 700 123456" required>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <input type="hidden" name="country_code" id="country-code">
+                            <div id="phone-error" class="hidden mt-2">
+                                <p class="text-sm text-red-600 flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Please enter a valid phone number
+                                </p>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2">We'll only contact you if we need more details</p>
                         </div>
                     </div>
                     
                     <div>
-                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                        <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                        <div class="relative">
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 placeholder-gray-400" placeholder="What's your story about?" required>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                     
                     <div>
-                        <label for="story" class="block text-sm font-medium text-gray-700 mb-1">Your Story</label>
-                        <textarea id="story" name="story" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required></textarea>
+                        <label for="story" class="block text-sm font-medium text-gray-700 mb-2">Your Story</label>
+                        <div class="relative">
+                            <textarea id="story" name="story" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 placeholder-gray-400" placeholder="Tell us your experience in detail..." required></textarea>
+                            <div class="absolute top-3 right-3 flex items-center pr-3 pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="flex items-center">
-                        <input id="consent" name="consent" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" required>
-                        <label for="consent" class="ml-2 block text-sm text-gray-700">
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="consent" name="consent" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" required>
+                        </div>
+                        <label for="consent" class="ml-3 block text-sm text-gray-700">
                             I consent to having my story shared publicly on this platform
+                            <span class="text-gray-400 text-xs block mt-1">Your personal information will remain confidential</span>
                         </label>
                     </div>
                 </div>
                 
                 <div class="mt-8">
-                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-4 rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
+                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-4 rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Share Your Story
                     </button>
                 </div>
